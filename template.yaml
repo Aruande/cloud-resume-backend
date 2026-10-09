@@ -27,6 +27,13 @@ Resources:
         LogGroup: /aws/lambda/cloud-resume-visitor-counter
       MemorySize: 128
       PackageType: Zip
+      Policies:
+        - Statement:
+            - Sid: UpdateVisitorCounter
+              Effect: Allow
+              Action:
+                - dynamodb:UpdateItem
+              Resource: !GetAtt VisitorCounterTable.Arn
       RecursiveLoop: Terminate
       Runtime: python3.14
       RuntimeManagementConfig:
@@ -40,5 +47,19 @@ Resources:
         Trigger1Event:
           Type: HttpApi
           Properties:
-            Method: ANY
+            Method: POST
             Path: /visitor-count
+
+  VisitorCounterTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      TableName: cloud-resume-visitors
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
