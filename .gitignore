@@ -1,0 +1,22 @@
+# Python virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Pytest cache
+.pytest_cache/
+
+# macOS files
+.DS_Store
+
+# AWS SAM build files
+.aws-sam/
+
+# Local environment variables
+.env
+.env.*
+
+# Original AWS Lambda download
+cloud-resume-visitor-counter.zip
