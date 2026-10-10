@@ -17,10 +17,13 @@ def test_lambda_returns_updated_visitor_count():
         "Attributes": {"count": 42}
     }
 
+   
     # Replace the real AWS connection with our mock
-    with patch("boto3.resource", return_value=mock_dynamodb):
+    with patch("boto3.resource", return_value=mock_dynamodb), \
+         patch.dict("os.environ", {"TABLE_NAME": "cloud-resume-visitors-test"}):
         sys.modules.pop("lambda_function", None)
         import lambda_function
+
 
         response = lambda_function.lambda_handler({}, None)
 

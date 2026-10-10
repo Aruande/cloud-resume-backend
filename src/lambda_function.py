@@ -1,8 +1,9 @@
 import json
 import boto3
+import os 
 
 dynamodb = boto3.resource("dynamodb")
-table = dynamodb.Table("cloud-resume-visitors")
+table = dynamodb.Table(os.environ["TABLE_NAME"])  # Use the environment variable for the table name
 
 def lambda_handler(event, context):
     response = table.update_item(
