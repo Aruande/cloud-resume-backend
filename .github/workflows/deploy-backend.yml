@@ -1,0 +1,52 @@
+
+name: Deploy Backend to AWS
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    name: Test and Deploy Backend
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+
+      - name: Install test dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Run tests
+        run: python -m pytest -q
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::841162710990:role/GitHubActionsCloudResumeBackendDeployRole
+          aws-region: us-east-2
+
+      - name: Set up AWS SAM
+        uses: aws-actions/setup-sam@v2
+
+      - name: Build backend
+        run: sam build
+
+      - name: Deploy test backend
+        run: |
+          sam deploy \
+            --config-file samconfig.toml \
+            --role-arn arn:aws:iam::841162710990:role/CloudResumeBackendCloudFormationExecutionRole \
+            --no-confirm-changeset \
+            --no-fail-on-empty-changeset
