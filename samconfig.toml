@@ -1,0 +1,12 @@
+
+version = 0.1
+
+[default.deploy.parameters]
+stack_name = "cloud-resume-backend-test"
+region = "us-east-2"
+resolve_s3 = false
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-rurf5lgwu0fl"
+s3_prefix = "cloud-resume-backend-test"
+capabilities = "CAPABILITY_IAM"
+confirm_changeset = false
+fail_on_empty_changeset = false
