@@ -20,3 +20,9 @@ __pycache__/
 
 # Original AWS Lambda download
 cloud-resume-visitor-counter.zip
+# Local AWS deployment and IAM troubleshooting files
+backend-trust-policy.json
+cloudformation-execution-policy.json
+cloudformation-trust-policy.json
+github-deployment-policy.json
+processed-template.json
