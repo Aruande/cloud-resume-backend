@@ -6,6 +6,8 @@ A serverless visitor counter built with Python and AWS as part of my Cloud Resum
 
 **Frontend repository:** https://github.com/Aruande/cloud-resume-frontend
 
+**Technical Blog Post:** [From Cloud Computing Student to Cloud Builder: My AWS Cloud Resume Challenge Journey](https://dev.to/aruande/from-cloud-computing-student-to-cloud-builder-my-aws-cloud-resume-challenge-journey-7b9)
+
 ## Project Overview
 
 This backend provides a visitor counter for my cloud-hosted resume website. It uses AWS Lambda to process HTTP requests, Amazon DynamoDB to store the visitor count, and Amazon API Gateway to expose the functionality through an API.
